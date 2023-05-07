@@ -8,5 +8,5 @@ interface ApiService {
     @GET("en/API/MostPopularMovies/k_j1nzvq5w")
     fun loadMovies(): Single<MovieResponse>
 
-// todo разобраться с долбанным гитом
+
 }

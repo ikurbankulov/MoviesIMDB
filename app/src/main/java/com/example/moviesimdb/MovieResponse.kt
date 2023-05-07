@@ -3,7 +3,7 @@ package com.example.moviesimdb
 import com.google.gson.annotations.SerializedName
 
 data class MovieResponse(
-    @SerializedName("item")
+    @SerializedName("items")
     val movies: List<Movie>
 ) {
 }
