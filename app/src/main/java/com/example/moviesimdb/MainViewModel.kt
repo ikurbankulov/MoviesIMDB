@@ -16,13 +16,18 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     private val _movies = MutableLiveData<List<Movie>>()
     val movies: LiveData<List<Movie>> = _movies
 
-    fun loadMovies() {
+    init {
+        loadMovies()
+    }
+
+    private fun loadMovies() {
         val disposable = ApiFactory.apiService.loadMovies()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ response ->
                 if (response.movies.isNotEmpty()) {
                     Log.d("TEST", response.toString())
+                    _movies.value = response.movies
                 } else {
                     Log.d("TEST", "Response is empty")
                 }
