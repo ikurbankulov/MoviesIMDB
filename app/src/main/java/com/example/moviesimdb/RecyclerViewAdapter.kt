@@ -1,5 +1,6 @@
 package com.example.moviesimdb
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,7 +13,7 @@ import com.bumptech.glide.Glide
 class RecyclerViewAdapter : RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>() {
 
     var movieList: List<Movie> = mutableListOf<Movie>()
-        set(value){
+        set(value) {
             field = value
             notifyDataSetChanged()
         }
@@ -32,7 +33,16 @@ class RecyclerViewAdapter : RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>
             .into(holder.imageViewPoster)
         holder.textViewTitle.text = movie.name
         holder.textViewDescription.text = movie.description
-       // holder.ratingBar.rating = movie.rating.toFloat()
+        val ratingString = movie.rating
+        val rating = ratingString.toFloatOrNull()
+        if (rating != null) {
+            val maxRating = 10f
+            val numStars = holder.ratingBar.numStars
+            val filledStars = (rating / maxRating) * numStars
+            holder.ratingBar.rating = filledStars
+        } else {
+            Log.e("RecyclerViewAdapter", "Error converting rating string: $ratingString")
+        }
     }
 
     override fun getItemCount(): Int {
@@ -46,4 +56,3 @@ class RecyclerViewAdapter : RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>
         val textViewDescription = view.findViewById<TextView>(R.id.textViewDescription)
     }
 }
-
