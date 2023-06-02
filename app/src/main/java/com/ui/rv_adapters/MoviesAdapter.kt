@@ -1,4 +1,4 @@
-package com.example.moviesimdb
+package com.ui.rv_adapters
 
 import android.util.Log
 import android.view.LayoutInflater
@@ -9,10 +9,15 @@ import android.widget.RatingBar
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.data.models.Movie
+import com.data.models.MovieDetail
+import com.example.moviesimdb.R
+import com.ui.rv_adapters.MoviesAdapter.*
 
-class RecyclerViewAdapter : RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>() {
+class MoviesAdapter(var onItemClickListener: ((Movie) -> Unit)? = null) :
+    RecyclerView.Adapter<ViewHolder>() {
 
-    var movieList: List<Movie> = mutableListOf<Movie>()
+    var movieList: List<Movie> = mutableListOf()
         set(value) {
             field = value
             notifyDataSetChanged()
@@ -28,11 +33,13 @@ class RecyclerViewAdapter : RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val movie = movieList[position]
+        //   val movieDetail = movieDetails[position]
         Glide.with(holder.itemView)
             .load(movie.poster)
+            .override(800, 1200)
             .into(holder.imageViewPoster)
         holder.textViewTitle.text = movie.name
-        holder.textViewDescription.text = movie.description
+        holder.textViewDescription.text = movie.crew
         val ratingString = movie.rating
         val rating = ratingString.toFloatOrNull()
         if (rating != null) {
@@ -43,11 +50,16 @@ class RecyclerViewAdapter : RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>
         } else {
             Log.e("RecyclerViewAdapter", "Error converting rating string: $ratingString")
         }
+
+        holder.itemView.setOnClickListener {
+            onItemClickListener?.invoke(movie)
+        }
     }
 
     override fun getItemCount(): Int {
         return movieList.size
     }
+
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val imageViewPoster = view.findViewById<ImageView>(R.id.imageViewPoster)

@@ -1,15 +1,17 @@
-package com.example.moviesimdb
+package com.ui.movies_list
 
 import android.app.Application
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.data.models.Movie
+import com.data.source.ApiFactory
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.schedulers.Schedulers
 
-class MainViewModel(application: Application) : AndroidViewModel(application) {
+class MoviesListViewModel(application: Application) : AndroidViewModel(application) {
 
     private val compositeDisposable = CompositeDisposable()
 

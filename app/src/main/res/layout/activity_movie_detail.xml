@@ -1,81 +1,114 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#163C49">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+
+    <ImageView
+        android:id="@+id/imageViewPoster"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="300dp"
+        android:adjustViewBounds="true"
+        android:contentDescription="@null"
+        android:maxHeight="300dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@tools:sample/avatars" />
 
-        <ImageView
-            android:id="@+id/imageViewPoster"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:adjustViewBounds="true"
-            android:contentDescription="@null"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:src="@tools:sample/avatars" />
+    <TextView
+        android:id="@+id/textViewTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/imageViewPoster"
+        tools:text="Jungle Cruise (2021)" />
 
-        <TextView
-            android:id="@+id/textViewTitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="8dp"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintTop_toBottomOf="@id/imageViewPoster"
-            tools:text="Title" />
+    <RatingBar
+        android:id="@+id/ratingBar"
+        style="?android:attr/ratingBarStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="16dp"
+        android:isIndicator="true"
+        android:numStars="5"
+        android:progressBackgroundTint="#555555"
+        android:progressTint="#FFC107"
+        android:stepSize="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textViewTitle"
+        tools:rating="4" />
 
-        <TextView
-            android:id="@+id/textViewYear"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="8dp"
-            android:textSize="16sp"
-            app:layout_constraintTop_toBottomOf="@id/textViewTitle"
-            tools:text="1995" />
-
-        <TextView
-            android:id="@+id/textViewDescription"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="8dp"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintTop_toBottomOf="@id/textViewYear"
-            tools:text="Description of movie" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerViewTrailers"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:nestedScrollingEnabled="false"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintTop_toBottomOf="@id/textViewDescription"
-             />
-
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerViewReviews"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:nestedScrollingEnabled="false"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintTop_toBottomOf="@id/recyclerViewTrailers" />
-
-        <ImageView
-            android:id="@+id/imageViewStar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            app:layout_constraintBottom_toBottomOf="@id/imageViewPoster"
-            app:layout_constraintEnd_toEndOf="@id/imageViewPoster"
-            app:layout_constraintTop_toBottomOf="@id/imageViewPoster"
-            tools:srcCompat="@android:drawable/btn_star_big_on" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_genres"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="12dp"
+        android:orientation="horizontal"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toTopOf="@id/textViewStoryline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ratingBar"
+        tools:itemCount="5"
+        tools:listitem="@layout/genre_item" />
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:id="@+id/textViewStoryline"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:text="Storyline"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rv_genres" />
 
-</androidx.core.widget.NestedScrollView>
+
+    <TextView
+        android:id="@+id/textViewDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:padding="8dp"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@id/textViewStoryline"
+        tools:text="Description of movie" />
+
+
+    <ImageView
+        android:id="@+id/imageViewStar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/imageViewPoster"
+        app:layout_constraintBottom_toBottomOf="@id/imageViewPoster"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="16dp"
+        tools:srcCompat="@android:drawable/btn_star_big_on" />
+
+    <ImageView
+        android:id="@+id/backButton"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_margin="16dp"
+        android:rotation="270"
+        android:src="@drawable/back_arrow"
+        app:layout_constraintStart_toStartOf="@id/imageViewPoster"
+        app:layout_constraintTop_toTopOf="@id/imageViewPoster" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

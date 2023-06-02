@@ -1,4 +1,4 @@
-package com.example.moviesimdb
+package com.data.models
 
 import com.google.gson.annotations.SerializedName
 
@@ -8,11 +8,10 @@ data class Movie(
     @SerializedName("fullTitle")
     val name: String,
     @SerializedName("crew")
-    val description: String,
-    @SerializedName("year")
-    val year: String,
+    val crew: String,
     @SerializedName("imDbRating")
     val rating: String,
     @SerializedName("image")
     val poster: String,
-)
+
+    )
