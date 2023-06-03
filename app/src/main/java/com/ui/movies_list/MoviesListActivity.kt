@@ -1,12 +1,13 @@
 package com.ui.movies_list
 
 import android.os.Bundle
-import android.util.Log
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.moviesimdb.R
+import com.ui.movie_detail.FinderActivity
 import com.ui.movie_detail.MovieDetailActivity
 import com.ui.rv_adapters.MoviesAdapter
 
@@ -15,10 +16,11 @@ class MoviesListActivity : AppCompatActivity() {
     private lateinit var viewModel: MoviesListViewModel
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: MoviesAdapter
+    private lateinit var searchView: ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_movie_list)
         viewModel = ViewModelProvider(this)[MoviesListViewModel::class.java]
 
         recyclerView = findViewById(R.id.recyclerViewMovies)
@@ -38,6 +40,12 @@ class MoviesListActivity : AppCompatActivity() {
                 movie.poster,
                 movie.rating
             )
+            startActivity(intent)
+        }
+
+        searchView = findViewById(R.id.imageButtonSearch)
+        searchView.setOnClickListener {
+            val intent = FinderActivity.newIntent(this@MoviesListActivity)
             startActivity(intent)
         }
 

@@ -33,10 +33,9 @@ class MoviesAdapter(var onItemClickListener: ((Movie) -> Unit)? = null) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val movie = movieList[position]
-        //   val movieDetail = movieDetails[position]
         Glide.with(holder.itemView)
             .load(movie.poster)
-            .override(800, 1200)
+            .override(800, 1600)
             .into(holder.imageViewPoster)
         holder.textViewTitle.text = movie.name
         holder.textViewDescription.text = movie.crew

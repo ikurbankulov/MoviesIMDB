@@ -6,19 +6,8 @@
     android:id="@+id/recyclerViewMovies"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#163C49">
+    android:background="#0F111D">
 
-    <ImageView
-        android:id="@+id/backButton"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:rotation="270"
-        android:src="@drawable/back_arrow"
-        app:layout_constraintBottom_toBottomOf="@id/textViewTitle"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textViewTitle"
@@ -31,7 +20,6 @@
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/backButton"
         app:layout_constraintTop_toTopOf="parent" />
 
 
@@ -39,24 +27,44 @@
         android:id="@+id/editTextSearch"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        app:layout_constraintTop_toBottomOf="@id/textViewTitle"
-        app:layout_constraintStart_toEndOf="@id/imageButtonSearch"
+        android:layout_marginTop="16dp"
+        android:background="#292B37"
+        android:fontFamily="@font/roboto"
+        android:hint="Search Movie"
+        android:paddingStart="44dp"
+        android:textColorHint="#56575C"
         app:layout_constraintEnd_toEndOf="parent"
-        android:background="#237B9C"
-        android:layout_marginTop="16dp"/>
+        app:layout_constraintStart_toEndOf="@id/imageButtonSearch"
+        app:layout_constraintTop_toBottomOf="@id/textViewTitle" />
 
     <ImageButton
         android:id="@+id/imageButtonSearch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
         android:background="@android:color/transparent"
         android:padding="8dp"
-        app:layout_constraintStart_toStartOf="parent"
         android:src="?android:attr/actionModeWebSearchDrawable"
-        app:layout_constraintTop_toTopOf="@id/editTextSearch"
         app:layout_constraintBottom_toBottomOf="@id/editTextSearch"
-        app:tint="@color/white" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/editTextSearch"
+        app:tint="#56585D" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_finder"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="24dp"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/editTextSearch"
+        app:spanCount="2"
+        tools:itemCount="6"
+        tools:listitem="@layout/movie_item" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

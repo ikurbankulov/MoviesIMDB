@@ -15,6 +15,9 @@
         android:theme="@style/Theme.MoviesIMDB.NoActionBarAndStatus"
         tools:targetApi="31">
         <activity
+            android:name="com.ui.movie_detail.FinderActivity"
+            android:exported="false" />
+        <activity
             android:name="com.ui.movie_detail.MovieDetailActivity"
             android:exported="false" />
         <activity
@@ -29,6 +32,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>

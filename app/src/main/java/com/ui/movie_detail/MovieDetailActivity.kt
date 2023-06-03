@@ -2,6 +2,8 @@ package com.ui.movie_detail
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BlurMaskFilter
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
@@ -14,11 +16,13 @@ import com.data.models.MovieDetail
 import com.example.moviesimdb.R
 import com.ui.movies_list.MoviesListViewModel
 import com.ui.rv_adapters.GenresAdapter
+import jp.wasabeef.glide.transformations.BlurTransformation
 
 class MovieDetailActivity : AppCompatActivity() {
 
     private lateinit var viewModel: MovieDetailViewModel
     private lateinit var poster: ImageView
+    private lateinit var verticalPoster: ImageView
     private lateinit var title: TextView
     private lateinit var ratingBar: RatingBar
     private lateinit var description: TextView
@@ -41,7 +45,19 @@ class MovieDetailActivity : AppCompatActivity() {
         val movieRating = intent.getStringExtra(EXTRA_MOVIE_RATING)
 
         title.text = movieName
-        Glide.with(this).load(moviePoster).override(1500, 1500).centerCrop().into(poster)
+
+        Glide.with(this)
+            .load(moviePoster)
+            .override(1500, 1500)
+            .centerCrop()
+            .transform(BlurTransformation(20,3))
+            .into(poster)
+
+        Glide.with(this)
+            .load(moviePoster)
+            .override(1000, 1500)
+            .centerCrop().into(verticalPoster)
+
         ratingBar.rating = movieRating?.toFloatOrNull() ?: 0f
 
         viewModel = ViewModelProvider(this)[MovieDetailViewModel::class.java]
@@ -55,6 +71,7 @@ class MovieDetailActivity : AppCompatActivity() {
     private fun initViews() {
         recyclerView = findViewById<RecyclerView>(R.id.rv_genres)
         poster = findViewById(R.id.imageViewPoster)
+        verticalPoster = findViewById(R.id.verticalImageViewPoster)
         title = findViewById(R.id.textViewTitle)
         ratingBar = findViewById(R.id.ratingBar)
         description = findViewById(R.id.textViewDescription)

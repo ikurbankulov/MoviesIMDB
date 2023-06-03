@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:minHeight="280dp"
     app:cardCornerRadius="16dp"
     app:cardUseCompatPadding="true">
 
@@ -18,7 +19,6 @@
             android:layout_height="match_parent"
             android:adjustViewBounds="true"
             android:contentDescription="@null"
-            android:minHeight="270dp"
             android:scaleType="centerCrop"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintBottom_toTopOf="@id/infoContainer"
@@ -32,7 +32,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            android:background="#237B9C"
+            android:background="#21242D"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -74,7 +74,7 @@
                 android:layout_marginBottom="8dp"
                 android:maxLines="3"
                 android:text="Description of the movie"
-                android:textColor="@color/white"
+                android:textColor="#5A5D65"
                 android:textSize="12sp" />
 
         </LinearLayout>
