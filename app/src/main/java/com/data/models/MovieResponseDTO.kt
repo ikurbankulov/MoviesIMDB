@@ -1,9 +1,8 @@
 package com.data.models
 
-import com.data.models.Movie
 import com.google.gson.annotations.SerializedName
 
-data class MovieResponse(
+data class MovieResponseDTO(
     @SerializedName("items")
-    val movies: List<Movie>
+    val movieDTOS: List<MovieDTO>
 )

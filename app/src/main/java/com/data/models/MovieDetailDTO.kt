@@ -2,18 +2,17 @@ package com.data.models
 
 import com.google.gson.annotations.SerializedName
 
-data class Movie(
+data class MovieDetailDTO(
     @SerializedName("id")
     val id: String,
-    @SerializedName("title")
-    val title: String,
     @SerializedName("fullTitle")
     val name: String,
-    @SerializedName("crew")
-    val crew: String,
+    @SerializedName("genreList")
+    val genre: List<GenreDTO>,
+    @SerializedName("plot")
+    val description: String,
     @SerializedName("imDbRating")
     val rating: String,
     @SerializedName("image")
     val poster: String,
-
-    )
+)

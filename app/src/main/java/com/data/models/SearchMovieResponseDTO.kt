@@ -2,7 +2,7 @@ package com.data.models
 
 import com.google.gson.annotations.SerializedName
 
-data class SearchMovieResponse(
+data class SearchMovieResponseDTO(
     @SerializedName("results")
-    val movies: List<Movie>
+    val movieDTOS: List<MovieDTO>
 )

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#0F111D"
-    tools:context="com.ui.movies_list.MoviesListActivity">
+    tools:context="com.presentation.movies_list.MoviesListActivity">
 
     <TextView
         android:id="@+id/textViewWatchNow"
@@ -36,7 +36,7 @@
         app:tint="@color/white" />
 
     <HorizontalScrollView
-        android:id="@id/categoryButtonsContainer"
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
@@ -46,7 +46,6 @@
         app:layout_constraintTop_toBottomOf="@id/textViewWatchNow">
 
         <LinearLayout
-            android:id="@+id/categoryButtonsContainer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
@@ -104,7 +103,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/categoryButtonsContainer"
+        app:layout_constraintTop_toBottomOf="@id/scrollView"
         app:spanCount="2"
         tools:itemCount="20"
         tools:listitem="@layout/movie_item" />

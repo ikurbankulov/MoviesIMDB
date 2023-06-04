@@ -1,39 +1,26 @@
-package com.ui.movie_detail
+package com.presentation.movie_detail
 
 import android.content.Context
 import android.content.Intent
-import android.graphics.Bitmap
-import android.graphics.BlurMaskFilter
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.ImageView
-import android.widget.RatingBar
-import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.data.models.MovieDetail
-import com.example.moviesimdb.R
-import com.ui.movies_list.MoviesListViewModel
-import com.ui.rv_adapters.GenresAdapter
+import com.example.moviesimdb.databinding.ActivityMovieDetailBinding
+import com.presentation.rv_adapters.GenresAdapter
 import jp.wasabeef.glide.transformations.BlurTransformation
 
 class MovieDetailActivity : AppCompatActivity() {
 
     private lateinit var viewModel: MovieDetailViewModel
-    private lateinit var poster: ImageView
-    private lateinit var verticalPoster: ImageView
-    private lateinit var title: TextView
-    private lateinit var ratingBar: RatingBar
-    private lateinit var description: TextView
-    private lateinit var recyclerView: RecyclerView
+    private lateinit var binding: ActivityMovieDetailBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_movie_detail)
-        initViews()
+        binding = ActivityMovieDetailBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         val adapter = GenresAdapter()
-        recyclerView.adapter = adapter
+        binding.rvGenres.adapter = adapter
 
         if (!intent.hasExtra(EXTRA_ID)) {
             finish()
@@ -44,37 +31,29 @@ class MovieDetailActivity : AppCompatActivity() {
         val moviePoster = intent.getStringExtra(EXTRA_MOVIE_POSTER)
         val movieRating = intent.getStringExtra(EXTRA_MOVIE_RATING)
 
-        title.text = movieName
+        binding.textViewTitle.text = movieName
 
         Glide.with(this)
             .load(moviePoster)
             .override(1500, 1500)
             .centerCrop()
-            .transform(BlurTransformation(20,3))
-            .into(poster)
+            .transform(BlurTransformation(20, 3))
+            .into(binding.imageViewPoster)
 
         Glide.with(this)
             .load(moviePoster)
             .override(1000, 1500)
-            .centerCrop().into(verticalPoster)
+            .centerCrop()
+            .into(binding.verticalImageViewPoster)
 
-        ratingBar.rating = movieRating?.toFloatOrNull() ?: 0f
+        binding.ratingTextView.text = movieRating
 
         viewModel = ViewModelProvider(this)[MovieDetailViewModel::class.java]
         viewModel.loadMovieDetail(movieId!!)
         viewModel.movie.observe(this) { description ->
-            this.description.text = description.description
-            adapter.genres = description.genres
+            binding.textViewDescription.text = description.description
+            adapter.genreDTOS = description.genre
         }
-    }
-
-    private fun initViews() {
-        recyclerView = findViewById<RecyclerView>(R.id.rv_genres)
-        poster = findViewById(R.id.imageViewPoster)
-        verticalPoster = findViewById(R.id.verticalImageViewPoster)
-        title = findViewById(R.id.textViewTitle)
-        ratingBar = findViewById(R.id.ratingBar)
-        description = findViewById(R.id.textViewDescription)
     }
 
     companion object {

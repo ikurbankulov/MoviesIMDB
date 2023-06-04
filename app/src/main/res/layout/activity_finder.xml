@@ -33,6 +33,7 @@
         android:hint="Search Movie"
         android:paddingStart="44dp"
         android:textColorHint="#56575C"
+        android:textColor="#56575C"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/imageButtonSearch"
         app:layout_constraintTop_toBottomOf="@id/textViewTitle" />

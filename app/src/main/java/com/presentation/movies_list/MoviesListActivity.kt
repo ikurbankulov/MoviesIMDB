@@ -1,35 +1,32 @@
-package com.ui.movies_list
+package com.presentation.movies_list
 
 import android.os.Bundle
-import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.moviesimdb.R
-import com.ui.movie_detail.FinderActivity
-import com.ui.movie_detail.MovieDetailActivity
-import com.ui.rv_adapters.MoviesAdapter
+import com.example.moviesimdb.databinding.ActivityMovieListBinding
+import com.presentation.finder.FinderActivity
+import com.presentation.movie_detail.MovieDetailActivity
+import com.presentation.rv_adapters.MoviesAdapter
 
 class MoviesListActivity : AppCompatActivity() {
 
+    private lateinit var binding: ActivityMovieListBinding
     private lateinit var viewModel: MoviesListViewModel
-    private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: MoviesAdapter
-    private lateinit var searchView: ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_movie_list)
+        binding = ActivityMovieListBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         viewModel = ViewModelProvider(this)[MoviesListViewModel::class.java]
 
-        recyclerView = findViewById(R.id.recyclerViewMovies)
         adapter = MoviesAdapter()
-        recyclerView.adapter = adapter
-        recyclerView.layoutManager = GridLayoutManager(this, 2)
+        binding.recyclerViewMovies.adapter = adapter
+        binding.recyclerViewMovies.layoutManager = GridLayoutManager(this, 2)
 
         viewModel.movies.observe(this) { movies ->
-            adapter.movieList = movies
+            adapter.movieDTOList = movies
         }
 
         adapter.onItemClickListener = { movie ->
@@ -43,8 +40,7 @@ class MoviesListActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        searchView = findViewById(R.id.imageButtonSearch)
-        searchView.setOnClickListener {
+        binding.imageButtonSearch.setOnClickListener {
             val intent = FinderActivity.newIntent(this@MoviesListActivity)
             startActivity(intent)
         }

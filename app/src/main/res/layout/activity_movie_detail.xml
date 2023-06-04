@@ -68,13 +68,26 @@
             android:layout_marginTop="10dp"
             android:layout_marginBottom="16dp"
             android:isIndicator="true"
-            android:numStars="5"
-            android:progressBackgroundTint="#555555"
+            android:rating="1"
+            android:numStars="1"
+            android:progressBackgroundTint="#FFC107"
             android:progressTint="#FFC107"
-            android:stepSize="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/textViewTitle"
-            tools:rating="4" />
+            tools:rating="1" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/ratingTextView"
+            app:layout_constraintStart_toStartOf="@id/ratingBar"
+            app:layout_constraintTop_toTopOf="@id/ratingBar"
+            tools:text="6.7"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/ratingBar"
+            android:layout_marginStart="24dp"
+            android:textColor="#5A5D65"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_genres"
