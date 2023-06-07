@@ -34,6 +34,8 @@ class MoviesAdapter(var onItemClickListener: ((MovieDTO) -> Unit)? = null) :
         holder.binding.textViewDescription.text = movie.crew
         val ratingString = movie.rating
         val rating = ratingString.toFloatOrNull()
+
+
         if (rating != null) {
             val maxRating = 10f
             val numStars = holder.binding.ratingBar.numStars

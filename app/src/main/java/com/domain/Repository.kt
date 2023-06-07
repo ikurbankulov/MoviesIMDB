@@ -1,11 +1,14 @@
 package com.domain
 
-import androidx.lifecycle.LiveData
+import com.data.models.MovieDTO
+import com.data.models.MovieDetailDTO
 
 interface Repository {
 
-    fun getMoviesList(): LiveData<List<Movie>>
+    suspend fun loadMoviesList(): List<MovieDTO>
 
-    fun getMovieDetail(movieId: String): LiveData<Movie>
+    suspend fun loadMovieDetail(movieId: String): MovieDetailDTO
+
+    suspend fun searchMovie(query: String): List<MovieDTO>
 
 }
