@@ -6,13 +6,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.data.models.MovieDTO
+import com.domain.models.MovieEntity
 import com.example.moviesimdb.databinding.MovieItemBinding
 import com.presentation.rv_adapters.MoviesAdapter.*
 
-class MoviesAdapter(var onItemClickListener: ((MovieDTO) -> Unit)? = null) :
+class MoviesAdapter(var onItemClickListener: ((MovieEntity) -> Unit)? = null) :
     RecyclerView.Adapter<ViewHolder>() {
 
-    var movieDTOList: List<MovieDTO> = mutableListOf()
+    var movieList: List<MovieEntity> = mutableListOf()
         set(value) {
             field = value
             notifyDataSetChanged()
@@ -25,7 +26,7 @@ class MoviesAdapter(var onItemClickListener: ((MovieDTO) -> Unit)? = null) :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val movie = movieDTOList[position]
+        val movie = movieList[position]
         Glide.with(holder.itemView)
             .load(movie.poster)
             .override(800, 1600)
@@ -51,7 +52,7 @@ class MoviesAdapter(var onItemClickListener: ((MovieDTO) -> Unit)? = null) :
     }
 
     override fun getItemCount(): Int {
-        return movieDTOList.size
+        return movieList.size
     }
 
 

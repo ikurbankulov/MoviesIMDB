@@ -1,4 +1,4 @@
-package com.data.source
+package com.data.network
 
 import com.data.models.MovieDetailDTO
 import com.data.models.MovieResponseDTO

@@ -26,7 +26,7 @@ class MoviesListActivity : AppCompatActivity() {
         binding.recyclerViewMovies.layoutManager = GridLayoutManager(this, 2)
 
         viewModel.moviesListLiveData.observe(this) { movies ->
-            adapter.movieDTOList = movies
+            adapter.movieList = movies
         }
 
         adapter.onItemClickListener = { movie ->

@@ -1,6 +1,6 @@
 package com.domain.models
 
-data class Movie(
+data class MovieEntity(
     val id: String,
     val title: String,
     val name: String,

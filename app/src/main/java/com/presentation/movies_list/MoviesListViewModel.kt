@@ -5,8 +5,8 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.data.RepositoryImpl
-import com.data.models.MovieDTO
+import com.data.repository_impl.RepositoryImpl
+import com.domain.models.MovieEntity
 import com.domain.use_cases.LoadMoviesListUseCase
 import kotlinx.coroutines.launch
 
@@ -15,8 +15,8 @@ class MoviesListViewModel(application: Application) : AndroidViewModel(applicati
     private val repository = RepositoryImpl()
     private val loadMoviesListUseCase = LoadMoviesListUseCase(repository)
 
-    private val _moviesListLiveData = MutableLiveData<List<MovieDTO>>()
-    val moviesListLiveData: LiveData<List<MovieDTO>> = _moviesListLiveData
+    private val _moviesListLiveData = MutableLiveData<List<MovieEntity>>()
+    val moviesListLiveData: LiveData<List<MovieEntity>> = _moviesListLiveData
 
     init {
         loadMovies()

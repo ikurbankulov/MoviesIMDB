@@ -52,7 +52,7 @@ class MovieDetailActivity : AppCompatActivity() {
         viewModel.loadMovieDetail(movieId!!)
         viewModel.movie.observe(this) { description ->
             binding.textViewDescription.text = description.description
-            adapter.genreDTOS = description.genre
+            adapter.genre = description.genre
         }
     }
 

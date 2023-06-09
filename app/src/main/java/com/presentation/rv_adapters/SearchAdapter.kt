@@ -5,11 +5,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.data.models.MovieDTO
+import com.domain.models.MovieEntity
 import com.example.moviesimdb.databinding.MovieItemBinding
 
 class SearchAdapter : RecyclerView.Adapter<SearchAdapter.ViewHolder>() {
 
-    var moviesList: List<MovieDTO> = mutableListOf()
+    var moviesList: List<MovieEntity> = mutableListOf()
         set(value) {
             field = value
             notifyDataSetChanged()
