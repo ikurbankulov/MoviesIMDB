@@ -1,4 +1,4 @@
-package com.presentation.movie_detail
+package com.presentation.movie_detail_activity
 
 import android.content.Context
 import android.content.Intent
@@ -7,7 +7,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.example.moviesimdb.databinding.ActivityMovieDetailBinding
-import com.presentation.rv_adapters.GenresAdapter
 import jp.wasabeef.glide.transformations.BlurTransformation
 
 class MovieDetailActivity : AppCompatActivity() {

@@ -1,19 +1,17 @@
-package com.presentation.movies_list
+package com.presentation.movies_list_activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.GridLayoutManager
 import com.example.moviesimdb.databinding.ActivityMovieListBinding
-import com.presentation.finder.FinderActivity
-import com.presentation.movie_detail.MovieDetailActivity
-import com.presentation.rv_adapters.MoviesAdapter
+import com.presentation.finder_activity.FinderActivity
+import com.presentation.movie_detail_activity.MovieDetailActivity
 
 class MoviesListActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMovieListBinding
     private lateinit var viewModel: MoviesListViewModel
-    private lateinit var adapter: MoviesAdapter
+    private lateinit var moviesAdapter: MoviesAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,15 +19,15 @@ class MoviesListActivity : AppCompatActivity() {
         setContentView(binding.root)
         viewModel = ViewModelProvider(this)[MoviesListViewModel::class.java]
 
-        adapter = MoviesAdapter()
-        binding.recyclerViewMovies.adapter = adapter
-        binding.recyclerViewMovies.layoutManager = GridLayoutManager(this, 2)
+        moviesAdapter = MoviesAdapter()
+        binding.recyclerViewMovies.adapter = moviesAdapter
+        binding.recyclerViewMovies.recycledViewPool.setMaxRecycledViews(0, 0)
 
         viewModel.moviesListLiveData.observe(this) { movies ->
-            adapter.movieList = movies
+            moviesAdapter.submitList(movies)
         }
 
-        adapter.onItemClickListener = { movie ->
+        moviesAdapter.onItemClickListener = { movie ->
             val intent = MovieDetailActivity.newIntent(
                 this@MoviesListActivity,
                 movie.id,

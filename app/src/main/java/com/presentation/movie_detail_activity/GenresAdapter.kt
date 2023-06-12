@@ -1,15 +1,15 @@
-package com.presentation.rv_adapters
+package com.presentation.movie_detail_activity
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.data.models.GenreDTO
 import com.domain.models.GenreEntity
 import com.example.moviesimdb.databinding.GenreItemBinding
+import com.presentation.models.GenreUi
 
 class GenresAdapter : RecyclerView.Adapter<GenresAdapter.ViewHolder>() {
 
-    var genre: List<GenreEntity> = emptyList()
+    var genre: List<GenreUi> = emptyList()
         set(value) {
             field = value
             notifyDataSetChanged()

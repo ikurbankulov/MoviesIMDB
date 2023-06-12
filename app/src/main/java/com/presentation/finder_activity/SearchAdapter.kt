@@ -1,10 +1,9 @@
-package com.presentation.rv_adapters
+package com.presentation.finder_activity
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.data.models.MovieDTO
 import com.domain.models.MovieEntity
 import com.example.moviesimdb.databinding.MovieItemBinding
 

@@ -1,12 +1,11 @@
-package com.presentation.finder
+package com.presentation.finder_activity
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.data.repository_impl.RepositoryImpl
-import com.data.models.MovieDTO
+import com.data.repository.RepositoryImpl
 import com.domain.models.MovieEntity
 import com.domain.use_cases.SearchMovieUseCase
 import kotlinx.coroutines.launch

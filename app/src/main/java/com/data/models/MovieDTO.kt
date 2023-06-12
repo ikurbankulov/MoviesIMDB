@@ -4,16 +4,16 @@ import com.google.gson.annotations.SerializedName
 
 data class MovieDTO(
     @SerializedName("id")
-    val id: String,
+    val id: String?,
     @SerializedName("title")
-    val title: String,
+    val title: String?,
     @SerializedName("fullTitle")
-    val name: String,
+    val name: String?,
     @SerializedName("crew")
-    val crew: String,
+    val crew: String?,
     @SerializedName("imDbRating")
-    val rating: String,
+    val rating: String?,
     @SerializedName("image")
-    val poster: String,
+    val poster: String?,
 
     )
