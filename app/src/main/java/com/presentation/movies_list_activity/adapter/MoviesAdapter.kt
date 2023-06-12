@@ -1,17 +1,16 @@
-package com.presentation.movies_list_activity
+package com.presentation.movies_list_activity.adapter
 
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
-import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.moviesimdb.databinding.MovieItemBinding
 import com.presentation.mapper.Mapper
 import com.presentation.models.MovieUi
 
 class MoviesAdapter(var onItemClickListener: ((MovieUi) -> Unit)? = null) :
-    ListAdapter<MovieUi, MoviesAdapter.MovieViewHolder>(MovieDiffCallback()) {
+    ListAdapter<MovieUi, MovieViewHolder>(MovieDiffCallback()) {
 
     private val mapper = Mapper()
     var count = 0
@@ -37,7 +36,4 @@ class MoviesAdapter(var onItemClickListener: ((MovieUi) -> Unit)? = null) :
         }
     }
 
-    class MovieViewHolder(val binding: MovieItemBinding) : RecyclerView.ViewHolder(binding.root) {
-
-    }
 }

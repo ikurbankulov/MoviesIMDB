@@ -1,23 +1,23 @@
-package com.presentation.finder_activity
+package com.presentation.search_activity
 
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import com.example.moviesimdb.databinding.ActivityFinderBinding
+import com.example.moviesimdb.databinding.ActivitySearchBinding
 
-class FinderActivity : AppCompatActivity() {
+class SearchActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityFinderBinding
-    private lateinit var viewModel: FinderViewModel
+    private lateinit var binding: ActivitySearchBinding
+    private lateinit var viewModel: SearchViewModel
     private lateinit var adapter: SearchAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityFinderBinding.inflate(layoutInflater)
+        binding = ActivitySearchBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        viewModel = ViewModelProvider(this)[FinderViewModel::class.java]
+        viewModel = ViewModelProvider(this)[SearchViewModel::class.java]
 
         adapter = SearchAdapter()
         binding.rvFinder.adapter = adapter
@@ -28,13 +28,13 @@ class FinderActivity : AppCompatActivity() {
         }
 
         viewModel.movies.observe(this) { movies ->
-            adapter.moviesList = movies
+            adapter.submitList(movies)
         }
     }
 
     companion object {
         fun newIntent(context: Context): Intent {
-            return Intent(context, FinderActivity::class.java)
+            return Intent(context, SearchActivity::class.java)
         }
     }
 }

@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.example.moviesimdb.databinding.ActivityMovieDetailBinding
+import com.presentation.movie_detail_activity.adapter.GenresAdapter
 import jp.wasabeef.glide.transformations.BlurTransformation
 
 class MovieDetailActivity : AppCompatActivity() {
@@ -18,8 +19,8 @@ class MovieDetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMovieDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        val adapter = GenresAdapter()
-        binding.rvGenres.adapter = adapter
+        val genresAdapter = GenresAdapter()
+        binding.rvGenres.adapter = genresAdapter
 
         if (!intent.hasExtra(EXTRA_ID)) {
             finish()
@@ -51,7 +52,7 @@ class MovieDetailActivity : AppCompatActivity() {
         viewModel.loadMovieDetail(movieId!!)
         viewModel.movie.observe(this) { description ->
             binding.textViewDescription.text = description.description
-            adapter.genre = description.genre
+            genresAdapter.submitList(description.genre)
         }
     }
 

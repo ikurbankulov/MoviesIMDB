@@ -1,9 +1,9 @@
-package com.presentation.movies_list_activity
+package com.presentation.search_activity
 
 import androidx.recyclerview.widget.DiffUtil
 import com.presentation.models.MovieUi
 
-class MovieDiffCallback: DiffUtil.ItemCallback<MovieUi>() {
+class SearchDiffCallback: DiffUtil.ItemCallback<MovieUi>() {
     override fun areItemsTheSame(oldItem: MovieUi, newItem: MovieUi): Boolean {
         return oldItem.id == newItem.id
     }

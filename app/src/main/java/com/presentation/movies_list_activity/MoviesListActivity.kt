@@ -4,8 +4,9 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.example.moviesimdb.databinding.ActivityMovieListBinding
-import com.presentation.finder_activity.FinderActivity
+import com.presentation.search_activity.SearchActivity
 import com.presentation.movie_detail_activity.MovieDetailActivity
+import com.presentation.movies_list_activity.adapter.MoviesAdapter
 
 class MoviesListActivity : AppCompatActivity() {
 
@@ -21,7 +22,6 @@ class MoviesListActivity : AppCompatActivity() {
 
         moviesAdapter = MoviesAdapter()
         binding.recyclerViewMovies.adapter = moviesAdapter
-        binding.recyclerViewMovies.recycledViewPool.setMaxRecycledViews(0, 0)
 
         viewModel.moviesListLiveData.observe(this) { movies ->
             moviesAdapter.submitList(movies)
@@ -39,7 +39,7 @@ class MoviesListActivity : AppCompatActivity() {
         }
 
         binding.imageButtonSearch.setOnClickListener {
-            val intent = FinderActivity.newIntent(this@MoviesListActivity)
+            val intent = SearchActivity.newIntent(this@MoviesListActivity)
             startActivity(intent)
         }
 
