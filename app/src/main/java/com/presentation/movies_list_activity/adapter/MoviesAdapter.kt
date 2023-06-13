@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.moviesimdb.databinding.MovieItemBinding
 import com.presentation.mapper.Mapper
 import com.presentation.models.MovieUi
@@ -25,6 +26,7 @@ class MoviesAdapter(var onItemClickListener: ((MovieUi) -> Unit)? = null) :
         val movie = getItem(position)
         Glide.with(holder.itemView)
             .load(movie.poster)
+            .diskCacheStrategy(DiskCacheStrategy.ALL)
             .override(800, 1600)
             .into(holder.binding.imageViewPoster)
         holder.binding.textViewTitle.text = movie.name

@@ -1,4 +1,4 @@
-package com.presentation.search_activity
+package com.presentation.search_activity.adapter
 
 import androidx.recyclerview.widget.DiffUtil
 import com.presentation.models.MovieUi

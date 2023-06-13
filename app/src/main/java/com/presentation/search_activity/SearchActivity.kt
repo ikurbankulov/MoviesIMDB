@@ -6,6 +6,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.example.moviesimdb.databinding.ActivitySearchBinding
+import com.presentation.search_activity.adapter.SearchAdapter
 
 class SearchActivity : AppCompatActivity() {
 

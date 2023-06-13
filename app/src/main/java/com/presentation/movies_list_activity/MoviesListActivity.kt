@@ -28,13 +28,7 @@ class MoviesListActivity : AppCompatActivity() {
         }
 
         moviesAdapter.onItemClickListener = { movie ->
-            val intent = MovieDetailActivity.newIntent(
-                this@MoviesListActivity,
-                movie.id,
-                movie.name,
-                movie.poster,
-                movie.rating
-            )
+            val intent = MovieDetailActivity.newIntent(this@MoviesListActivity, movie.id)
             startActivity(intent)
         }
 
