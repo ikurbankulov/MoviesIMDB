@@ -2,40 +2,19 @@ package com.presentation.movies_list_activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
-import com.example.moviesimdb.databinding.ActivityMovieListBinding
-import com.presentation.search_activity.SearchActivity
-import com.presentation.movie_detail_activity.MovieDetailActivity
-import com.presentation.movies_list_activity.adapter.MoviesAdapter
+import com.example.moviesimdb.R
 
 class MoviesListActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityMovieListBinding
-    private lateinit var viewModel: MoviesListViewModel
-    private lateinit var moviesAdapter: MoviesAdapter
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMovieListBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-        viewModel = ViewModelProvider(this)[MoviesListViewModel::class.java]
+        setContentView(R.layout.activity_movie_list)
 
-        moviesAdapter = MoviesAdapter()
-        binding.recyclerViewMovies.adapter = moviesAdapter
-
-        viewModel.moviesListLiveData.observe(this) { movies ->
-            moviesAdapter.submitList(movies)
+        if (savedInstanceState == null) {
+            supportFragmentManager
+                .beginTransaction()
+                .add(R.id.movies_list_container, MoviesListFragment())
+                .commit()
         }
-
-        moviesAdapter.onItemClickListener = { movie ->
-            val intent = MovieDetailActivity.newIntent(this@MoviesListActivity, movie.id)
-            startActivity(intent)
-        }
-
-        binding.imageButtonSearch.setOnClickListener {
-            val intent = SearchActivity.newIntent(this@MoviesListActivity)
-            startActivity(intent)
-        }
-
     }
 }

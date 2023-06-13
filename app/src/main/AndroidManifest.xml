@@ -15,10 +15,10 @@
         android:theme="@style/Theme.MoviesIMDB.NoActionBarAndStatus"
         tools:targetApi="31">
         <activity
-            android:name="com.presentation.search_activity.SearchActivity"
+            android:name="com.presentation.search_activity.SearchFragment"
             android:exported="false" />
         <activity
-            android:name="com.presentation.movie_detail_activity.MovieDetailActivity"
+            android:name="com.presentation.movie_detail_activity.MovieDetailFragment"
             android:exported="false" />
         <activity
             android:name=".FinderActivity"

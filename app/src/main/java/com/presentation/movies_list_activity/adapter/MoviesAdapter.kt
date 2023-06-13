@@ -26,7 +26,7 @@ class MoviesAdapter(var onItemClickListener: ((MovieUi) -> Unit)? = null) :
         val movie = getItem(position)
         Glide.with(holder.itemView)
             .load(movie.poster)
-            .diskCacheStrategy(DiskCacheStrategy.ALL)
+            .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
             .override(800, 1600)
             .into(holder.binding.imageViewPoster)
         holder.binding.textViewTitle.text = movie.name

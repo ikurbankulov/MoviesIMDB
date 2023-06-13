@@ -1,9 +1,8 @@
 package com.presentation.movie_detail_activity
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.data.repository.RepositoryImpl
 import com.domain.use_cases.LoadMovieDetailUseCase
@@ -11,7 +10,7 @@ import com.presentation.mapper.Mapper
 import com.presentation.models.MovieDetailUi
 import kotlinx.coroutines.launch
 
-class MovieDetailViewModel(application: Application) : AndroidViewModel(application) {
+class MovieDetailViewModel() : ViewModel() {
 
     private val repository = RepositoryImpl()
     private val loadMovieDetailUseCase = LoadMovieDetailUseCase(repository)
