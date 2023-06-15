@@ -8,10 +8,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.example.moviesimdb.databinding.FragmentSearchBinding
 import com.presentation.search_activity.adapter.SearchAdapter
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 class SearchFragment : Fragment() {
 
@@ -51,9 +55,25 @@ class SearchFragment : Fragment() {
         }
 
 
-        viewModel.movies.observe(viewLifecycleOwner) { movies ->
-            adapter.submitList(movies)
-            showLoading(false)
+        lifecycleScope.launch {
+            viewModel.movies.collect {
+                when (it) {
+                    is UiState.Success -> {
+                        adapter.submitList(it.movieList)
+                        showLoading(false)
+                    }
+
+                    is UiState.Loading -> {
+                        showLoading(true)
+                        // TODO: исправить отображение прогрессбара при переходе на страницу
+                    }
+
+                    is UiState.Error -> {
+                        Toast.makeText(requireContext(), it.message, Toast.LENGTH_LONG).show()
+                    }
+
+                }
+            }
         }
     }
 

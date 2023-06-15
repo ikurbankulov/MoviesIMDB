@@ -1,13 +1,12 @@
 package com.presentation.movies_list_activity
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.data.repository.RepositoryImpl
 import com.domain.use_cases.LoadMoviesListUseCase
 import com.presentation.mapper.Mapper
-import com.presentation.models.MovieUi
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 class MoviesListViewModel() : ViewModel() {
@@ -16,18 +15,18 @@ class MoviesListViewModel() : ViewModel() {
     private val loadMoviesListUseCase = LoadMoviesListUseCase(repository)
     private val mapper = Mapper()
 
-    private val _moviesListLiveData = MutableLiveData<List<MovieUi>>()
-    val moviesListLiveData: LiveData<List<MovieUi>> = _moviesListLiveData
+    private val _moviesListStateFlow = MutableStateFlow<UiState>(UiState.Loading)
+    val moviesListStateFlow = _moviesListStateFlow.asStateFlow()
 
     init {
         loadMovies()
     }
 
-    fun loadMovies() {
+   private fun loadMovies() {
         viewModelScope.launch {
             val moviesList = loadMoviesListUseCase()
             val mappedMoviesList = mapper.mapEntityListToUiList(moviesList)
-            _moviesListLiveData.value = mappedMoviesList
+            _moviesListStateFlow.value = UiState.Success(mappedMoviesList)
         }
     }
 }

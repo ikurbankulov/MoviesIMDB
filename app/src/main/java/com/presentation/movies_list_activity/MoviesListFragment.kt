@@ -1,16 +1,23 @@
 package com.presentation.movies_list_activity
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.example.moviesimdb.R
 import com.example.moviesimdb.databinding.FragmentMoviesListBinding
 import com.presentation.movie_detail_activity.MovieDetailFragment
 import com.presentation.movies_list_activity.adapter.MoviesAdapter
 import com.presentation.search_activity.SearchFragment
+import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.launch
 
 
 class MoviesListFragment : Fragment() {
@@ -38,8 +45,24 @@ class MoviesListFragment : Fragment() {
         moviesAdapter = MoviesAdapter()
         binding.recyclerViewMovies.adapter = moviesAdapter
 
-        viewModel.moviesListLiveData.observe(viewLifecycleOwner) { movies ->
-            moviesAdapter.submitList(movies)
+        lifecycleScope.launch {
+            viewModel.moviesListStateFlow
+                .collect { it ->
+                    when (it) {
+                        is UiState.Success -> {
+                            moviesAdapter.submitList(it.movieList)
+                            Log.d("MoviesListFragment", "launchStateFlow")
+                        }
+
+                        is UiState.Loading -> {
+                            // TODO:  сделать отображение плейсхолдера
+                        }
+
+                        is UiState.Error -> {
+                            Toast.makeText(requireContext(), it.message, Toast.LENGTH_LONG).show()
+                        }
+                    }
+                }
         }
 
         moviesAdapter.onItemClickListener = { movie ->
@@ -59,14 +82,8 @@ class MoviesListFragment : Fragment() {
         }
     }
 
-
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
-    }
-
-    companion object {
-
-
     }
 }

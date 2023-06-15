@@ -4,14 +4,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.moviesimdb.databinding.FragmentMovieDetailBinding
 import com.presentation.movie_detail_activity.adapter.GenresAdapter
-import com.presentation.movies_list_activity.MoviesListFragment
 import jp.wasabeef.glide.transformations.BlurTransformation
+import kotlinx.coroutines.launch
 
 class MovieDetailFragment : Fragment() {
     private lateinit var viewModel: MovieDetailViewModel
@@ -39,28 +41,51 @@ class MovieDetailFragment : Fragment() {
         val movieId = requireArguments().getString(EXTRA_ID)
 
         movieId?.let { viewModel.loadMovieDetail(it) }
-        viewModel.movie.observe(viewLifecycleOwner) { movie ->
-            genresAdapter.submitList(movie.genre)
-            binding.textViewTitle.text = movie.name
-            binding.textViewDescription.text = movie.description
-            binding.ratingTextView.text = movie.rating
+        lifecycleScope.launch {
+            viewModel.movie.collect { it ->
+                when (it) {
+                    is UiState.Success -> {
+                        val movie = it.movieDetail
 
-            Glide.with(this)
-                .load(movie.poster)
-                .override(1500, 1500)
-                .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
-                .centerCrop()
-                .transform(BlurTransformation(20, 3))
-                .into(binding.imageViewPoster)
+                        genresAdapter.submitList(movie.genre)
+                        binding.textViewTitle.text = movie.name
+                        binding.textViewDescription.text = movie.description
+                        binding.ratingTextView.text = movie.rating
 
-            Glide.with(this)
-                .load(movie.poster)
-                .override(1000, 1500)
-                .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
-                .centerCrop()
-                .into(binding.verticalImageViewPoster)
+                        Glide.with(this@MovieDetailFragment)
+                            .load(movie.poster)
+                            .override(1500, 1500)
+                            .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
+                            .centerCrop()
+                            .transform(BlurTransformation(20, 3))
+                            .into(binding.imageViewPoster)
+
+                        Glide.with(this@MovieDetailFragment)
+                            .load(movie.poster)
+                            .override(1000, 1500)
+                            .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
+                            .centerCrop()
+                            .into(binding.verticalImageViewPoster)
+                    }
+
+                    is UiState.Error -> {
+                        Toast.makeText(
+                            requireContext(),
+                            it.message,
+                            Toast.LENGTH_LONG
+                        )
+                            .show()
+                    }
+
+                    is UiState.Loading -> {
+                        // do nothing
+                    }
+
+                }
+            }
         }
     }
+
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
