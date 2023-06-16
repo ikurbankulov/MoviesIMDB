@@ -1,4 +1,4 @@
-package com.presentation.search_activity.adapter
+package com.presentation.search_ui.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

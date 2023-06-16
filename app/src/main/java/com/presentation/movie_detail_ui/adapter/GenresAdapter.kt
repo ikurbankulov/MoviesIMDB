@@ -1,4 +1,4 @@
-package com.presentation.movie_detail_activity.adapter
+package com.presentation.movie_detail_ui.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

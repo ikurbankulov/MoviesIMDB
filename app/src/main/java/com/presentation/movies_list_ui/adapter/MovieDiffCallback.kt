@@ -1,4 +1,4 @@
-package com.presentation.movies_list_activity.adapter
+package com.presentation.movies_list_ui.adapter
 
 import androidx.recyclerview.widget.DiffUtil
 import com.presentation.models.MovieUi

@@ -1,4 +1,4 @@
-package com.presentation.movies_list_activity.adapter
+package com.presentation.movies_list_ui.adapter
 
 import android.util.Log
 import android.view.LayoutInflater

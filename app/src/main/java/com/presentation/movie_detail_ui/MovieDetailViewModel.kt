@@ -1,4 +1,4 @@
-package com.presentation.movie_detail_activity
+package com.presentation.movie_detail_ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

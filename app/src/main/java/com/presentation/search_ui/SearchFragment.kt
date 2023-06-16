@@ -1,20 +1,17 @@
-package com.presentation.search_activity
+package com.presentation.search_ui
 
 import android.content.Context
 import android.os.Bundle
-import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.example.moviesimdb.databinding.FragmentSearchBinding
-import com.presentation.search_activity.adapter.SearchAdapter
-import kotlinx.coroutines.flow.collect
+import com.presentation.search_ui.adapter.SearchAdapter
 import kotlinx.coroutines.launch
 
 class SearchFragment : Fragment() {
@@ -70,6 +67,10 @@ class SearchFragment : Fragment() {
 
                     is UiState.Error -> {
                         Toast.makeText(requireContext(), it.message, Toast.LENGTH_LONG).show()
+                    }
+
+                    is UiState.Init -> {
+                        showLoading(false)
                     }
 
                 }

@@ -1,4 +1,4 @@
-package com.presentation.movies_list_activity
+package com.presentation.movies_list_ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

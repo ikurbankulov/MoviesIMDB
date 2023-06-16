@@ -1,4 +1,4 @@
-package com.presentation.movies_list_activity
+package com.presentation.movies_list_ui
 
 import android.os.Bundle
 import android.util.Log
@@ -7,16 +7,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import com.example.moviesimdb.R
 import com.example.moviesimdb.databinding.FragmentMoviesListBinding
-import com.presentation.movie_detail_activity.MovieDetailFragment
-import com.presentation.movies_list_activity.adapter.MoviesAdapter
-import com.presentation.search_activity.SearchFragment
-import kotlinx.coroutines.flow.distinctUntilChanged
+import com.facebook.shimmer.Shimmer
+import com.facebook.shimmer.ShimmerFrameLayout
+import com.presentation.movie_detail_ui.MovieDetailFragment
+import com.presentation.movies_list_ui.adapter.MoviesAdapter
+import com.presentation.search_ui.SearchFragment
 import kotlinx.coroutines.launch
 
 
@@ -24,6 +23,7 @@ class MoviesListFragment : Fragment() {
 
     private lateinit var viewModel: MoviesListViewModel
     private lateinit var moviesAdapter: MoviesAdapter
+    private var shimmer: ShimmerFrameLayout? = null
 
     private var _binding: FragmentMoviesListBinding? = null
     private val binding: FragmentMoviesListBinding
@@ -41,21 +41,26 @@ class MoviesListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this)[MoviesListViewModel::class.java]
-
         moviesAdapter = MoviesAdapter()
         binding.recyclerViewMovies.adapter = moviesAdapter
+
+        shimmer = view.findViewById(R.id.shimmerLayout)
+
 
         lifecycleScope.launch {
             viewModel.moviesListStateFlow
                 .collect { it ->
                     when (it) {
                         is UiState.Success -> {
+                            shimmer?.post { shimmer?.stopShimmer() }
+
+                            Log.d("MoviesListFragment", shimmer.toString())
+
                             moviesAdapter.submitList(it.movieList)
                             Log.d("MoviesListFragment", "launchStateFlow")
                         }
 
                         is UiState.Loading -> {
-                            // TODO:  сделать отображение плейсхолдера
                         }
 
                         is UiState.Error -> {

@@ -4,8 +4,8 @@
     android:id="@+id/movies_list_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:name="com.presentation.movies_list_activity.MoviesListFragment"
+    android:name="com.presentation.movies_list_ui.MoviesListFragment"
     android:background="#0F111D"
-    tools:context="com.presentation.movies_list_activity.MoviesListActivity"
+    tools:context="com.presentation.movies_list_ui.MoviesListActivity"
     tools:layout="@layout/fragment_movies_list" />
 

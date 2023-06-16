@@ -1,4 +1,4 @@
-package com.presentation.movie_detail_activity
+package com.presentation.movie_detail_ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,7 +11,7 @@ import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.moviesimdb.databinding.FragmentMovieDetailBinding
-import com.presentation.movie_detail_activity.adapter.GenresAdapter
+import com.presentation.movie_detail_ui.adapter.GenresAdapter
 import jp.wasabeef.glide.transformations.BlurTransformation
 import kotlinx.coroutines.launch
 

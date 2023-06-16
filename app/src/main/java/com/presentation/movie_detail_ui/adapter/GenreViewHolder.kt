@@ -1,4 +1,4 @@
-package com.presentation.movie_detail_activity.adapter
+package com.presentation.movie_detail_ui.adapter
 
 import androidx.recyclerview.widget.RecyclerView
 import com.example.moviesimdb.databinding.GenreItemBinding

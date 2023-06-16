@@ -1,4 +1,4 @@
-package com.presentation.search_activity
+package com.presentation.search_ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -15,7 +15,7 @@ class SearchViewModel() : ViewModel() {
     private val searchMovieUseCase = SearchMovieUseCase(repository)
     private val mapper = Mapper()
 
-    private val _movies = MutableStateFlow<UiState>(UiState.Loading)
+    private val _movies = MutableStateFlow<UiState>(UiState.Init)
     val movies = _movies.asStateFlow()
 
     fun searchMovie(query: String) {

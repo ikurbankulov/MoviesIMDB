@@ -1,4 +1,4 @@
-package com.presentation.search_activity
+package com.presentation.movies_list_ui
 
 import com.presentation.models.MovieUi
 
