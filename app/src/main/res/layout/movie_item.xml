@@ -8,86 +8,77 @@
     app:cardCornerRadius="16dp"
     app:cardUseCompatPadding="true">
 
-    <com.facebook.shimmer.ShimmerFrameLayout
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/shimmerLayout"
-        >
+        android:layout_gravity="bottom">
 
-        <FrameLayout
+        <ImageView
+            android:id="@+id/imageViewPoster"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="bottom">
+            android:layout_height="360dp"
+            android:adjustViewBounds="true"
+            android:background="#21242D"
+            android:contentDescription="@null"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/infoContainer"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
-                android:id="@+id/imageViewPoster"
-                android:layout_width="match_parent"
-                android:layout_height="360dp"
-                android:adjustViewBounds="true"
-                android:background="#21242D"
-                android:contentDescription="@null"
-                android:scaleType="centerCrop"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintBottom_toTopOf="@id/infoContainer"
-                app:layout_constraintEnd_toEndOf="parent"
+        <LinearLayout
+            android:id="@+id/infoContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:background="#21242D"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <TextView
+                android:id="@+id/textViewTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="4dp"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                tools:text="Movie Title" />
+
+            <RatingBar
+                android:id="@+id/ratingBar"
+                style="?android:attr/ratingBarStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:isIndicator="true"
+                android:numStars="5"
+                android:progressBackgroundTint="#555555"
+                android:progressTint="#FFC107"
+                android:rating="0"
+                android:stepSize="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@id/textViewTitle" />
 
-            <LinearLayout
-                android:id="@+id/infoContainer"
+            <TextView
+                android:id="@+id/textViewDescription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:background="#21242D"
-                android:orientation="vertical"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent">
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:maxLines="3"
+                android:textColor="#5A5D65"
+                android:textSize="12sp"
+                tools:text="Description of the movie" />
 
-                <TextView
-                    android:id="@+id/textViewTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="4dp"
-                    android:textColor="@color/white"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    tools:text="Movie Title" />
+        </LinearLayout>
 
-                <RatingBar
-                    android:id="@+id/ratingBar"
-                    style="?android:attr/ratingBarStyleSmall"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:isIndicator="true"
-                    android:numStars="5"
-                    android:progressBackgroundTint="#555555"
-                    android:progressTint="#FFC107"
-                    android:rating="0"
-                    android:stepSize="0.5"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/textViewTitle" />
-
-                <TextView
-                    android:id="@+id/textViewDescription"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="8dp"
-                    android:maxLines="3"
-                    android:textColor="#5A5D65"
-                    android:textSize="12sp"
-                    tools:text="Description of the movie" />
-
-            </LinearLayout>
-
-        </FrameLayout>
-
-    </com.facebook.shimmer.ShimmerFrameLayout>
-
+    </FrameLayout>
 
 </androidx.cardview.widget.CardView>

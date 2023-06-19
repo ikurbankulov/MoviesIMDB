@@ -16,6 +16,7 @@ import com.facebook.shimmer.ShimmerFrameLayout
 import com.presentation.movie_detail_ui.MovieDetailFragment
 import com.presentation.movies_list_ui.adapter.MoviesAdapter
 import com.presentation.search_ui.SearchFragment
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 
@@ -23,7 +24,6 @@ class MoviesListFragment : Fragment() {
 
     private lateinit var viewModel: MoviesListViewModel
     private lateinit var moviesAdapter: MoviesAdapter
-    private var shimmer: ShimmerFrameLayout? = null
 
     private var _binding: FragmentMoviesListBinding? = null
     private val binding: FragmentMoviesListBinding
@@ -44,23 +44,20 @@ class MoviesListFragment : Fragment() {
         moviesAdapter = MoviesAdapter()
         binding.recyclerViewMovies.adapter = moviesAdapter
 
-        shimmer = view.findViewById(R.id.shimmerLayout)
-
-
         lifecycleScope.launch {
             viewModel.moviesListStateFlow
                 .collect { it ->
                     when (it) {
                         is UiState.Success -> {
-                            shimmer?.post { shimmer?.stopShimmer() }
-
-                            Log.d("MoviesListFragment", shimmer.toString())
-
                             moviesAdapter.submitList(it.movieList)
-                            Log.d("MoviesListFragment", "launchStateFlow")
+                            delay(1000)
+                            binding.shimmerLayout.visibility = View.GONE
+                            binding.shimmerLayout.stopShimmer()
                         }
 
                         is UiState.Loading -> {
+                            binding.shimmerLayout.startShimmer()
+                            binding.shimmerLayout.visibility = View.VISIBLE
                         }
 
                         is UiState.Error -> {

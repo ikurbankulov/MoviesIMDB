@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.example.moviesimdb.databinding.FragmentSearchBinding
 import com.presentation.search_ui.adapter.SearchAdapter
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class SearchFragment : Fragment() {
@@ -44,11 +45,13 @@ class SearchFragment : Fragment() {
         binding.imageButtonSearch.setOnClickListener {
             val query = binding.editTextSearch.text.toString()
             viewModel.searchMovie(query)
+            binding.shimmerLayout.startShimmer()
+            binding.shimmerLayout.visibility = View.VISIBLE
             hideKeyboard()
-            if (query != previousQuery) {
-                showLoading(true)
-            }
-            previousQuery = query
+           // if (query != previousQuery) {
+           //     // TODO:
+           // }
+           // previousQuery = query
         }
 
 
@@ -57,12 +60,14 @@ class SearchFragment : Fragment() {
                 when (it) {
                     is UiState.Success -> {
                         adapter.submitList(it.movieList)
-                        showLoading(false)
+                        delay(1000)
+                        binding.shimmerLayout.visibility = View.GONE
+                        binding.shimmerLayout.stopShimmer()
                     }
 
                     is UiState.Loading -> {
-                        showLoading(true)
-                        // TODO: исправить отображение прогрессбара при переходе на страницу
+                        binding.shimmerLayout.startShimmer()
+                        binding.shimmerLayout.visibility = View.VISIBLE
                     }
 
                     is UiState.Error -> {
@@ -70,7 +75,7 @@ class SearchFragment : Fragment() {
                     }
 
                     is UiState.Init -> {
-                        showLoading(false)
+
                     }
 
                 }
@@ -83,9 +88,7 @@ class SearchFragment : Fragment() {
         _binding = null
     }
 
-    private fun showLoading(show: Boolean) {
-        binding.progressBarLoading.visibility = if (show) View.VISIBLE else View.GONE
-    }
+
 
     private fun Fragment.hideKeyboard() {
         val inputMethodManager =

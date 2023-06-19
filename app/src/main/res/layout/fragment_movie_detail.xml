@@ -11,7 +11,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-
         <ImageView
             android:id="@+id/imageViewPoster"
             android:layout_width="match_parent"
@@ -30,9 +29,9 @@
             android:layout_width="200dp"
             android:layout_height="300dp"
             android:layout_marginStart="28dp"
+            android:elevation="4dp"
             app:cardCornerRadius="16dp"
             app:cardElevation="4dp"
-            android:elevation="4dp"
             app:layout_constraintBottom_toBottomOf="@id/imageViewPoster"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/imageViewPoster">
@@ -68,26 +67,26 @@
             android:layout_marginTop="10dp"
             android:layout_marginBottom="16dp"
             android:isIndicator="true"
-            android:rating="1"
             android:numStars="1"
             android:progressBackgroundTint="#FFC107"
             android:progressTint="#FFC107"
+            android:rating="1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/textViewTitle"
             tools:rating="1" />
 
         <TextView
+            android:id="@+id/ratingTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/ratingTextView"
-            app:layout_constraintStart_toStartOf="@id/ratingBar"
-            app:layout_constraintTop_toTopOf="@id/ratingBar"
-            tools:text="6.7"
+            android:layout_marginStart="24dp"
+            android:textColor="#5A5D65"
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@id/ratingBar"
-            android:layout_marginStart="24dp"
-            android:textColor="#5A5D65"/>
+            app:layout_constraintStart_toStartOf="@id/ratingBar"
+            app:layout_constraintTop_toTopOf="@id/ratingBar"
+            tools:text="6.7" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_genres"
@@ -156,12 +155,11 @@
             android:id="@+id/addToFavouriteButton"
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:src="@drawable/heart"
             android:layout_marginBottom="10dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/cardView"
+            android:src="@drawable/heart"
             app:layout_constraintBottom_toBottomOf="@id/cardView"
-             />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/cardView" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

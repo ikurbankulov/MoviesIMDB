@@ -20,6 +20,6 @@ interface ApiService {
     companion object {
         const val ID = "id"
         const val QUERY = "query"
-        const val API_KEY = "k_j1nzvq5w"
+        const val API_KEY = "k_uafu9rmg"
     }
 }

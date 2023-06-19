@@ -31,10 +31,10 @@
         android:background="#292B37"
         android:fontFamily="@font/roboto"
         android:hint="Search Movie"
-        android:paddingStart="44dp"
         android:imeOptions="actionSearch"
-        android:textColorHint="#56575C"
+        android:paddingStart="44dp"
         android:textColor="#56575C"
+        android:textColorHint="#56575C"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/imageButtonSearch"
         app:layout_constraintTop_toBottomOf="@id/textViewTitle" />
@@ -55,17 +55,68 @@
         app:layout_constraintTop_toTopOf="@id/editTextSearch"
         app:tint="#56585D" />
 
-    <ProgressBar
-        android:layout_width="wrap_content"
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmerLayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/progressBarLoading"
-        app:layout_constraintStart_toStartOf="@id/rv_finder"
-        app:layout_constraintEnd_toEndOf="@id/rv_finder"
-        app:layout_constraintTop_toTopOf="@id/rv_finder"
-        app:layout_constraintBottom_toBottomOf="@id/rv_finder"
-        tools:visibility="visible"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="8dp"
+        android:orientation="vertical"
         android:visibility="invisible"
-        />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/editTextSearch"
+        tools:visibility="visible">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <include
+                    layout="@layout/movie_item_shimmer"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <include
+                    layout="@layout/movie_item_shimmer"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <include
+                    layout="@layout/movie_item_shimmer"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <include
+                    layout="@layout/movie_item_shimmer"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </com.facebook.shimmer.ShimmerFrameLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_finder"
