@@ -5,6 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:name="com.di.App"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -14,15 +15,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MoviesIMDB.NoActionBarAndStatus"
         tools:targetApi="31">
-        <activity
-            android:name="com.presentation.search_ui.SearchFragment"
-            android:exported="false" />
-        <activity
-            android:name="com.presentation.movie_detail_ui.MovieDetailFragment"
-            android:exported="false" />
-        <activity
-            android:name=".FinderActivity"
-            android:exported="false" />
         <activity
             android:name="com.presentation.movies_list_ui.MoviesListActivity"
             android:exported="true">

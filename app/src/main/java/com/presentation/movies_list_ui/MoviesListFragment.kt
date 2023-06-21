@@ -50,7 +50,7 @@ class MoviesListFragment : Fragment() {
                     when (it) {
                         is UiState.Success -> {
                             moviesAdapter.submitList(it.movieList)
-                            delay(1000)
+                            delay(DELAY_FOR_SMOOTH_TRANSITION)
                             binding.shimmerLayout.visibility = View.GONE
                             binding.shimmerLayout.stopShimmer()
                         }
@@ -87,5 +87,9 @@ class MoviesListFragment : Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+    }
+
+    companion object {
+        const val DELAY_FOR_SMOOTH_TRANSITION = 1000L
     }
 }
