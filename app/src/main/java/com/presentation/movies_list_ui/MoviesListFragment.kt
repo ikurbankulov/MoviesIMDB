@@ -1,7 +1,7 @@
 package com.presentation.movies_list_ui
 
+import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,24 +11,37 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.example.moviesimdb.R
 import com.example.moviesimdb.databinding.FragmentMoviesListBinding
-import com.facebook.shimmer.Shimmer
-import com.facebook.shimmer.ShimmerFrameLayout
+import com.presentation.App
+import com.presentation.ViewModelFactory
 import com.presentation.movie_detail_ui.MovieDetailFragment
 import com.presentation.movies_list_ui.adapter.MoviesAdapter
 import com.presentation.search_ui.SearchFragment
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 
 class MoviesListFragment : Fragment() {
 
     private lateinit var viewModel: MoviesListViewModel
+
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
+
     private lateinit var moviesAdapter: MoviesAdapter
 
     private var _binding: FragmentMoviesListBinding? = null
     private val binding: FragmentMoviesListBinding
         get() = _binding ?: throw RuntimeException("FragmentMoviesListBinding is null")
 
+    private val component by lazy {
+        (requireActivity().application as App).component
+    }
+
+    override fun onAttach(context: Context) {
+        component.inject(this)
+        super.onAttach(context)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,7 +53,7 @@ class MoviesListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProvider(this)[MoviesListViewModel::class.java]
+        viewModel = ViewModelProvider(this, viewModelFactory)[MoviesListViewModel::class.java]
         moviesAdapter = MoviesAdapter()
         binding.recyclerViewMovies.adapter = moviesAdapter
 

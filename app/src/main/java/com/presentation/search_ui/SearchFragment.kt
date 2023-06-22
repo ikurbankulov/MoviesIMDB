@@ -11,18 +11,34 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.example.moviesimdb.databinding.FragmentSearchBinding
+import com.presentation.App
+import com.presentation.ViewModelFactory
 import com.presentation.search_ui.adapter.SearchAdapter
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 class SearchFragment : Fragment() {
 
     private lateinit var viewModel: SearchViewModel
+
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
+
     private lateinit var adapter: SearchAdapter
     private var previousQuery: String = ""
     private var _binding: FragmentSearchBinding? = null
     private val binding: FragmentSearchBinding
         get() = _binding ?: throw RuntimeException("FragmentSearchBinding is null")
+
+    private val component by lazy {
+        (requireActivity().application as App).component
+    }
+
+    override fun onAttach(context: Context) {
+        component.inject(this)
+        super.onAttach(context)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,7 +50,7 @@ class SearchFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProvider(this)[SearchViewModel::class.java]
+        viewModel = ViewModelProvider(this, viewModelFactory)[SearchViewModel::class.java]
 
         adapter = SearchAdapter()
         binding.rvFinder.adapter = adapter

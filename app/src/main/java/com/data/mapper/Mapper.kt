@@ -6,8 +6,9 @@ import com.data.models.MovieDetailDTO
 import com.domain.models.GenreEntity
 import com.domain.models.MovieDetailEntity
 import com.domain.models.MovieEntity
+import javax.inject.Inject
 
-class Mapper {
+class Mapper @Inject constructor() {
 
     fun mapDtoListToEntityList(dtoList: List<MovieDTO>): List<MovieEntity> {
         return dtoList.map { dto ->

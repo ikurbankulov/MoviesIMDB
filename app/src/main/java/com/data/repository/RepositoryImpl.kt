@@ -5,10 +5,10 @@ import com.data.network.ApiFactory
 import com.domain.models.MovieDetailEntity
 import com.domain.models.MovieEntity
 import com.domain.repository.Repository
+import javax.inject.Inject
 
-class RepositoryImpl : Repository {
+class RepositoryImpl @Inject constructor(private val mapper: Mapper) : Repository {
 
-    private val mapper = Mapper()
 
     override suspend fun loadMoviesList(): List<MovieEntity> {
         val movieDTOList = ApiFactory.apiService.loadMovies().movieDTOList ?: emptyList()

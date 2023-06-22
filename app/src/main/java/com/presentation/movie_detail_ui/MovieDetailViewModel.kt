@@ -9,12 +9,12 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class MovieDetailViewModel() : ViewModel() {
-
-    private val repository = RepositoryImpl()
-    private val loadMovieDetailUseCase = LoadMovieDetailUseCase(repository)
-    private val mapper = Mapper()
+class MovieDetailViewModel @Inject constructor(
+    private val loadMovieDetailUseCase: LoadMovieDetailUseCase,
+    private val mapper: Mapper
+) : ViewModel() {
 
     private val _movie = MutableStateFlow<UiState>(UiState.Loading)
     val movie: StateFlow<UiState> = _movie.asStateFlow()

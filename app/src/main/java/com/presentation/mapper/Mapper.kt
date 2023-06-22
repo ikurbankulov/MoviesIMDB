@@ -7,8 +7,9 @@ import com.domain.models.MovieEntity
 import com.presentation.models.GenreUi
 import com.presentation.models.MovieDetailUi
 import com.presentation.models.MovieUi
+import javax.inject.Inject
 
-class Mapper {
+class Mapper @Inject constructor() {
 
         fun mapEntityListToUiList(uiList: List<MovieEntity>): List<MovieUi> {
             return uiList.map { it ->

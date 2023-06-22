@@ -1,5 +1,6 @@
 package com.presentation.movie_detail_ui
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,16 +12,31 @@ import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.moviesimdb.databinding.FragmentMovieDetailBinding
+import com.presentation.App
+import com.presentation.ViewModelFactory
 import com.presentation.movie_detail_ui.adapter.GenresAdapter
 import jp.wasabeef.glide.transformations.BlurTransformation
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 class MovieDetailFragment : Fragment() {
     private lateinit var viewModel: MovieDetailViewModel
 
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
+
     private var _binding: FragmentMovieDetailBinding? = null
     private val binding: FragmentMovieDetailBinding
         get() = _binding ?: throw RuntimeException("FragmentMovieDetailBinding is null")
+
+    private val component by lazy {
+        (requireActivity().application as App).component
+    }
+
+    override fun onAttach(context: Context) {
+        component.inject(this)
+        super.onAttach(context)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -33,7 +49,7 @@ class MovieDetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProvider(this)[MovieDetailViewModel::class.java]
+        viewModel = ViewModelProvider(this, viewModelFactory)[MovieDetailViewModel::class.java]
 
         val genresAdapter = GenresAdapter()
         binding.rvGenres.adapter = genresAdapter

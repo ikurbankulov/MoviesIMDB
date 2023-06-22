@@ -8,12 +8,12 @@ import com.presentation.mapper.Mapper
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class SearchViewModel() : ViewModel() {
-
-    private val repository = RepositoryImpl()
-    private val searchMovieUseCase = SearchMovieUseCase(repository)
-    private val mapper = Mapper()
+class SearchViewModel @Inject constructor(
+    private val searchMovieUseCase: SearchMovieUseCase,
+    private val mapper: Mapper
+) : ViewModel() {
 
     private val _movies = MutableStateFlow<UiState>(UiState.Init)
     val movies = _movies.asStateFlow()

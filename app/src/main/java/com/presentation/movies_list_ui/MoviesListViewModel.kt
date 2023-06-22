@@ -8,12 +8,13 @@ import com.presentation.mapper.Mapper
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class MoviesListViewModel() : ViewModel() {
+class MoviesListViewModel @Inject constructor(
+    private val loadMoviesListUseCase: LoadMoviesListUseCase,
+    private val mapper: Mapper
+) : ViewModel() {
 
-    private val repository = RepositoryImpl()
-    private val loadMoviesListUseCase = LoadMoviesListUseCase(repository)
-    private val mapper = Mapper()
 
     private val _moviesListStateFlow = MutableStateFlow<UiState>(UiState.Loading)
     val moviesListStateFlow = _moviesListStateFlow.asStateFlow()
@@ -22,7 +23,7 @@ class MoviesListViewModel() : ViewModel() {
         loadMovies()
     }
 
-   private fun loadMovies() {
+    private fun loadMovies() {
         viewModelScope.launch {
             val moviesList = loadMoviesListUseCase()
             val mappedMoviesList = mapper.mapEntityListToUiList(moviesList)
